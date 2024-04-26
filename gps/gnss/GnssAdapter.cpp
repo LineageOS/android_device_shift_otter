@@ -134,7 +134,6 @@ GnssAdapter::GnssAdapter() :
     mSystemPowerState(POWER_STATE_UNKNOWN),
     mBlockCPIInfo{},
     mPowerOn(false),
-    mAllowFlpNetworkFixes(0),
     mDreIntEnabled(false),
     mNativeAgpsHandler(mSystemStatus->getOsObserver(), *this),
     mGnssEnergyConsumedCb(nullptr),
@@ -811,7 +810,6 @@ GnssAdapter::readConfigCommand()
                 };
                 UTIL_READ_CONF(LOC_PATH_FLP_CONF, flp_conf_param_table);
                 LOC_LOGd("allowFlpNetworkFixes %u", allowFlpNetworkFixes);
-                mAdapter->setAllowFlpNetworkFixes(allowFlpNetworkFixes);
             }
         }
     };
@@ -3807,9 +3805,7 @@ GnssAdapter::needReportForGnssClient(const UlpLocation& ulpLocation,
 bool
 GnssAdapter::needReportForFlpClient(enum loc_sess_status status,
                                     LocPosTechMask techMask) {
-    if (((LOC_SESS_INTERMEDIATE == status) && !(techMask & LOC_POS_TECH_MASK_SENSORS) &&
-        (!getAllowFlpNetworkFixes())) ||
-        (LOC_SESS_FAILURE == status)) {
+    if (LOC_SESS_FAILURE == status) {
         return false;
     } else {
         return true;
