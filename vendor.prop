@@ -59,7 +59,7 @@ vendor.audio.feature.vbat.enable=true
 
 # Bluetooth
 bluetooth.device.class_of_device=90,2,12
-bluetooth.device.default_name=Fairphone 5 5G
+bluetooth.device.default_name=SHIFTphone 8
 bluetooth.hardware.power.idle_cur_ma=6
 bluetooth.hardware.power.operating_voltage_mv=3700
 bluetooth.hardware.power.rx_cur_ma=28
@@ -184,7 +184,7 @@ ro.recovery.usb.fastboot.pid=D00D
 sys.usb.mtp.batchcancel=1
 vendor.usb.diag.func.name=ffs
 vendor.usb.dpl.inst.name=dpl
-vendor.usb.product_string=Fairphone 5 5G
+vendor.usb.product_string=SHIFTphone 8
 vendor.usb.qdss.inst.name=qdss_mdm
 vendor.usb.rmnet.func.name=gsi
 vendor.usb.rmnet.inst.name=rmnet

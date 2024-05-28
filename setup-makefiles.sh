@@ -7,8 +7,8 @@
 
 set -e
 
-DEVICE=FP5
-VENDOR=fairphone
+DEVICE=otter
+VENDOR=shift
 
 # Load extract_utils and do some sanity checks
 MY_DIR="${BASH_SOURCE%/*}"
@@ -27,7 +27,7 @@ source "${HELPER}"
 
 function vendor_imports() {
     cat <<EOF >>"$1"
-		"device/fairphone/FP5",
+		"device/shift/otter",
 		"hardware/qcom-caf/sm8350",
 		"hardware/qcom-caf/wlan",
 		"vendor/qcom/opensource/commonsys/display",

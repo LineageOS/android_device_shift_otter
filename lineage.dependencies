@@ -1,6 +1,6 @@
 [
   {
-    "repository": "android_kernel_fairphone_qcm6490",
-    "target_path": "kernel/fairphone/qcm6490"
+    "repository": "android_kernel_shift_qcm6490",
+    "target_path": "kernel/shift/qcm6490"
   }
 ]

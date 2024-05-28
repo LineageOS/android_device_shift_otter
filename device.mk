@@ -361,7 +361,7 @@ PRODUCT_COPY_FILES += \
 
 # Vibrator
 PRODUCT_PACKAGES += \
-    vendor.qti.hardware.vibrator.service.FP5
+    vendor.qti.hardware.vibrator.service.otter
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/vibrator/excluded-input-devices.xml:$(TARGET_COPY_OUT_VENDOR)/etc/excluded-input-devices.xml
@@ -396,4 +396,4 @@ PRODUCT_BOOT_JARS += \
     WfdCommon
 
 # Inherit from the proprietary files makefile.
-$(call inherit-product, vendor/fairphone/FP5/FP5-vendor.mk)
+$(call inherit-product, vendor/shift/otter/otter-vendor.mk)

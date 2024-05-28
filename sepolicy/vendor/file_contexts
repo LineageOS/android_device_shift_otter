@@ -37,4 +37,4 @@
 /vendor/bin/tctd                                                           u:object_r:tctd_exec:s0
 
 # Vibrator
-/vendor/bin/hw/vendor\.qti\.hardware\.vibrator\.service\.FP5               u:object_r:hal_vibrator_default_exec:s0
+/vendor/bin/hw/vendor\.qti\.hardware\.vibrator\.service\.otter             u:object_r:hal_vibrator_default_exec:s0

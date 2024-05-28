@@ -7,8 +7,8 @@
 
 set -e
 
-DEVICE=FP5
-VENDOR=fairphone
+DEVICE=otter
+VENDOR=shift
 
 # Load extract_utils and do some sanity checks
 MY_DIR="${BASH_SOURCE%/*}"

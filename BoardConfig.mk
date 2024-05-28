@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-DEVICE_PATH := device/fairphone/FP5
+DEVICE_PATH := device/shift/otter
 
 # A/B
 AB_OTA_UPDATER := true
@@ -47,7 +47,7 @@ BOARD_SUPPORTS_SOUND_TRIGGER := true
 BOARD_USES_ALSA_AUDIO := true
 
 # Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := FP5
+TARGET_BOOTLOADER_BOARD_NAME := otter
 
 # Camera
 TARGET_CAMERA_OVERRIDE_FORMAT_FROM_RESERVED := true
@@ -100,7 +100,7 @@ BOARD_KERNEL_IMAGE_NAME := Image
 BOARD_KERNEL_SEPARATED_DTBO := true
 TARGET_KERNEL_CONFIG := vendor/fp5-qgki_defconfig vendor/debugfs.config vendor/fp5.config
 TARGET_KERNEL_NO_GCC := true
-TARGET_KERNEL_SOURCE := kernel/fairphone/qcm6490
+TARGET_KERNEL_SOURCE := kernel/shift/qcm6490
 
 # Kernel modules
 BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE := $(DEVICE_PATH)/modules.blocklist
@@ -192,4 +192,4 @@ WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 
 # Inherit the proprietary files
-include vendor/fairphone/FP5/BoardConfigVendor.mk
+include vendor/shift/otter/BoardConfigVendor.mk

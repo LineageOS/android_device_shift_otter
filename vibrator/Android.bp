@@ -34,7 +34,7 @@ vibrator_cc_defaults {
 
 
 cc_library_shared {
-    name: "vendor.qti.hardware.vibrator.impl.FP5",
+    name: "vendor.qti.hardware.vibrator.impl.otter",
     defaults: ["vibrator_defaults"],
     vendor: true,
     srcs: [
@@ -53,13 +53,13 @@ cc_library_shared {
 }
 
 cc_binary {
-    name: "vendor.qti.hardware.vibrator.service.FP5",
+    name: "vendor.qti.hardware.vibrator.service.otter",
     defaults: ["vibrator_defaults"],
     vendor: true,
     relative_install_path: "hw",
-    init_rc: ["vendor.qti.hardware.vibrator.service.FP5.rc"],
+    init_rc: ["vendor.qti.hardware.vibrator.service.otter.rc"],
     vintf_fragments: [
-        "vendor.qti.hardware.vibrator.service.FP5.xml",
+        "vendor.qti.hardware.vibrator.service.otter.xml",
     ],
     srcs: [
         "service.cpp",
@@ -69,6 +69,6 @@ cc_binary {
         "libutils",
         "libbase",
         "libbinder_ndk",
-        "vendor.qti.hardware.vibrator.impl.FP5",
+        "vendor.qti.hardware.vibrator.impl.otter",
     ],
 }
