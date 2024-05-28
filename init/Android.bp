@@ -4,17 +4,10 @@
 //
 
 prebuilt_etc {
-    name: "fstab.default",
-    src: "fstab.default",
+    name: "fstab.qcom",
+    src: "fstab.qcom",
     vendor: true,
     vendor_ramdisk_available: true,
-}
-
-prebuilt_etc {
-    name: "init.bt_mac.rc",
-    src: "init.bt_mac.rc",
-    sub_dir: "init",
-    vendor: true,
 }
 
 prebuilt_etc {
@@ -32,13 +25,6 @@ prebuilt_etc {
 }
 
 prebuilt_etc {
-    name: "init.stnfc.rc",
-    src: "init.stnfc.rc",
-    sub_dir: "init/hw",
-    vendor: true,
-}
-
-prebuilt_etc {
     name: "init.target.rc",
     src: "init.target.rc",
     sub_dir: "init/hw",
@@ -49,12 +35,6 @@ prebuilt_etc {
     name: "ueventd.qcom.rc",
     filename: "ueventd.rc",
     src: "ueventd.qcom.rc",
-    vendor: true,
-}
-
-sh_binary {
-    name: "init.bt_mac.sh",
-    src: "init.bt_mac.sh",
     vendor: true,
 }
 

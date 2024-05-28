@@ -186,10 +186,8 @@ PRODUCT_PACKAGES += \
 
 # Init
 PRODUCT_PACKAGES += \
-    fstab.default \
-    fstab.default.vendor_ramdisk \
-    init.bt_mac.rc \
-    init.bt_mac.sh \
+    fstab.qcom \
+    fstab.qcom.vendor_ramdisk \
     init.class_main.sh \
     init.qcom.early_boot.sh \
     init.qcom.post_boot.sh \
@@ -198,7 +196,6 @@ PRODUCT_PACKAGES += \
     init.qcom.sh \
     init.qcom.usb.rc \
     init.qcom.usb.sh \
-    init.stnfc.rc \
     init.target.rc \
     ueventd.qcom.rc
 

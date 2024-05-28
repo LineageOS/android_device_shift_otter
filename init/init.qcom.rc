@@ -31,7 +31,6 @@
 
 import /vendor/etc/init/hw/init.qcom.usb.rc
 import /vendor/etc/init/hw/init.target.rc
-import /vendor/etc/init/hw/init.stnfc.rc
 
 on early-init
   # create symlink for vendor mount points
@@ -60,6 +59,19 @@ on init
     write /sys/fs/cgroup/memory/bg/memory.move_charge_at_immigrate 1
     chown root system /sys/fs/cgroup/memory/bg/tasks
     chmod 0660 /sys/fs/cgroup/memory/bg/tasks
+
+    # Support mount point for vibrator
+    chown system system /sys/class/leds/drv26xx_haptic/activate
+    chown system system /sys/class/leds/drv26xx_haptic/duration
+    chown system system /sys/class/leds/drv26xx_haptic/state
+    chown system system /sys/class/leds/drv26xx_haptic/calib
+    chown system system /sys/class/leds/drv26xx_haptic/CalBemf
+    chown system system /sys/class/leds/drv26xx_haptic/CalComp
+    chown system system /sys/class/leds/drv26xx_haptic/CalGain
+    chown system system /sys/class/leds/drv26xx_haptic/calib
+    chown system system /sys/class/leds/drv26xx_haptic/diag
+    chown system system /sys/class/leds/drv26xx_haptic/f0_lsb
+    chown system system /sys/class/leds/drv26xx_haptic/f0_msb
 
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
@@ -177,6 +189,9 @@ on boot
     chown root system /sys/kernel/dload/dload_mode
     chmod 0660 /sys/kernel/dload/dload_mode
 
+    chmod 0660 /sys/class/display/panel/bl_fps_func
+    chown system system /sys/class/display/panel/bl_fps_func
+    chmod 0660 /sys/class/backlight/panel0-backlight/brightness
     chown system system /sys/class/backlight/panel0-backlight/brightness
     chown system system /sys/class/backlight/panel0-backlight/max_brightness
     chown system system /sys/class/backlight/panel1-backlight/brightness
@@ -200,6 +215,8 @@ on boot
     # Create vpp directory
     mkdir /mnt/vendor/persist/vpp 0770 media media
 
+    chown system system /dev/goodix_fp
+    chmod 0660 /dev/goodix_fp
 
     # Create hvdcp_opti directory
     mkdir /mnt/vendor/persist/hvdcp_opti 0770 root system
@@ -366,6 +383,11 @@ on post-fs-data
     #Create dir for TUI
     mkdir /data/vendor/tui 0700 system drmrpc
 
+    mkdir /data/vendor/goodix 0770 system system
+    mkdir /data/vendor/goodix/gf_data 0770 system system
+    restorecon /data/vendor/goodix/gf_data
+    chmod 0770 /mnt/vendor/persist/goodix
+
 service nqnfcinfo /system/vendor/bin/nqnfcinfo
     class late_start
     group nfc
@@ -431,6 +453,13 @@ on property:sys.boot_completed=1
     #Reinit lmkd to reconfigure lmkd properties
     setprop lmkd.reinit 1
 
+on property:persist.sys.dynamic_fps=0
+    write /sys/class/display/panel/dynamic_fps 0    
+on property:persist.sys.dynamic_fps=1
+    write /sys/class/display/panel/dynamic_fps 1
+on property:persist.sys.dynamic_fps=2
+    write /sys/class/display/panel/dynamic_fps 2
+
 # corefile limit
 on property:persist.debug.trace=1
     mkdir /data/core 0777 root root
@@ -455,6 +484,12 @@ service qcom-c_main-sh /vendor/bin/init.class_main.sh
 on property:vold.decrypt=trigger_restart_framework
     start qcom-c_main-sh
     start wcnss-service
+
+on property:persist.sys.fts_gesture_mode=0
+    write /sys/bus/i2c/devices/3-0038/fts_gesture_mode 0
+
+on property:persist.sys.fts_gesture_mode=1
+    write /sys/bus/i2c/devices/3-0038/fts_gesture_mode 1
 
 service vendor.qrtr-ns /vendor/bin/qrtr-ns -f
     class core
