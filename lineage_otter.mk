@@ -14,8 +14,8 @@ $(call inherit-product, device/shift/otter/device.mk)
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
 # Boot animation
-TARGET_SCREEN_HEIGHT := 2700
-TARGET_SCREEN_WIDTH := 1224
+TARGET_SCREEN_HEIGHT := 2400
+TARGET_SCREEN_WIDTH := 1080
 
 # Device identifier. This must come after all inclusions.
 PRODUCT_NAME := lineage_otter
