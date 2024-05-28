@@ -1,8 +1,0 @@
-# Camera
-genfscon sysfs /class/debug_ois                                                 u:object_r:vendor_sysfs_camera:s0
-
-# Touchscreen
-genfscon sysfs /devices/platform/goodix_ts.0                                    u:object_r:vendor_sysfs_touchpanel:s0
-
-# Wakeup
-genfscon sysfs /devices/platform/soc/soc:focalfp_ft9362/wakeup                  u:object_r:sysfs_wakeup:s0
