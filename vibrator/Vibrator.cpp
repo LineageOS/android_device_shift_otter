@@ -80,7 +80,7 @@ namespace vibrator {
 
 #define test_bit(bit, array)    ((array)[(bit)/8] & (1<<((bit)%8)))
 
-static const char LED_DEVICE[] = "/sys/class/leds/vibrator";
+static const char LED_DEVICE[] = "/sys/class/leds/drv26xx_haptic";
 static const char HAPTICS_SYSFS[] = "/sys/class/qcom-haptics";
 
 static constexpr int32_t ComposeDelayMaxMs = 1000;
@@ -387,7 +387,7 @@ LedVibratorDevice::LedVibratorDevice() {
 
     mDetected = false;
 
-    snprintf(devicename, sizeof(devicename), "%s/%s", LED_DEVICE, "activate");
+    snprintf(devicename, sizeof(devicename), "%s/%s", LED_DEVICE, "state");
     fd = TEMP_FAILURE_RETRY(open(devicename, O_RDWR));
     if (fd < 0) {
         ALOGE("open %s failed, errno = %d", devicename, errno);
@@ -432,18 +432,8 @@ int LedVibratorDevice::on(int32_t timeoutMs) {
     int ret;
 
     snprintf(file, sizeof(file), "%s/%s", LED_DEVICE, "state");
-    ret = write_value(file, "1");
-    if (ret < 0)
-       goto error;
-
-    snprintf(file, sizeof(file), "%s/%s", LED_DEVICE, "duration");
     snprintf(value, sizeof(value), "%u\n", timeoutMs);
     ret = write_value(file, value);
-    if (ret < 0)
-       goto error;
-
-    snprintf(file, sizeof(file), "%s/%s", LED_DEVICE, "activate");
-    ret = write_value(file, "1");
     if (ret < 0)
        goto error;
 
@@ -459,7 +449,7 @@ int LedVibratorDevice::off()
     char file[PATH_MAX];
     int ret;
 
-    snprintf(file, sizeof(file), "%s/%s", LED_DEVICE, "activate");
+    snprintf(file, sizeof(file), "%s/%s", LED_DEVICE, "state");
     ret = write_value(file, "0");
     return ret;
 }
