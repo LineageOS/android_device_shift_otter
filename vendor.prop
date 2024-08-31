@@ -42,6 +42,7 @@ vendor.audio.feature.custom_stereo.enable=true
 vendor.audio.feature.display_port.enable=true
 vendor.audio.feature.dynamic_ecns.enable=true
 vendor.audio.feature.fluence.enable=true
+vendor.audio.feature.fm.enable=true
 vendor.audio.feature.hdmi_edid.enable=true
 vendor.audio.feature.hdmi_passthrough.enable=true
 vendor.audio.feature.hfp.enable=true
