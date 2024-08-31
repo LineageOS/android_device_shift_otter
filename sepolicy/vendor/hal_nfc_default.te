@@ -1,0 +1,1 @@
+allow hal_nfc_default tmsnfc_hwservice:hwservice_manager { add find };
