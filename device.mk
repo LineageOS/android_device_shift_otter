@@ -137,7 +137,8 @@ PRODUCT_PACKAGES += \
 
 # e-SIM
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/privapp-permissions-euicc.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-euicc.xml
+    $(LOCAL_PATH)/configs/default-permissions_com.google.android.euicc.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/default-permissions/default-permissions_com.google.android.euicc.xml \
+    $(LOCAL_PATH)/configs/privapp_allowlist_com.google.android.euicc.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp_allowlist_com.google.android.euicc.xml
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.euicc.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.hardware.telephony.euicc.xml
