@@ -1,2 +1,10 @@
+# Fingerprint
+/dev/goodix_fp                                                             u:object_r:fingerprint_device:s0
+
+# NFC
+/dev/tms_nfc                                                               u:object_r:nfc_device:s0
+/vendor/bin/hw/android\.hardware\.nfc@1\.2-service-tms                     u:object_r:hal_nfc_default_exec:s0
+
 # Vibrator
 /vendor/bin/hw/vendor\.qti\.hardware\.vibrator\.service\.otter             u:object_r:hal_vibrator_default_exec:s0
+/vendor/bin/vibratorcal                                                    u:object_r:vendor_vibratorcal_exec:s0

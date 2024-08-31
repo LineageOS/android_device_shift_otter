@@ -1,0 +1,5 @@
+# Vibrator
+genfscon sysfs /devices/platform/soc/a84000.i2c/i2c-2/2-005a/leds/drv26xx_haptic u:object_r:sysfs_leds:s0
+
+# Wakeup
+genfscon sysfs /devices/platform/soc/a84000.i2c/i2c-2/2-0028/wakeup              u:object_r:sysfs_wakeup:s0

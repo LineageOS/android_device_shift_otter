@@ -1,2 +1,5 @@
+# Fingerprint
 type fingerprint_data_file, file_type, data_file_type;
+
+# Touchscreen
 type vendor_sysfs_touchpanel, fs_type, sysfs_type;
