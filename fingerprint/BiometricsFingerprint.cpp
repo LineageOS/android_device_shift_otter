@@ -18,6 +18,7 @@
 
 #include <hardware/hw_auth_token.h>
 
+#include <android-base/file.h>
 #include <hardware/hardware.h>
 #include "fingerprint.h"
 #include "BiometricsFingerprint.h"
@@ -31,6 +32,18 @@ namespace biometrics {
 namespace fingerprint {
 namespace V2_3 {
 namespace implementation {
+
+#define UDFPS_HBM_PATH "/sys/class/display/panel/bl_fps_func"
+#define UDFPS_HBM_ON "1"
+#define UDFPS_HBM_OFF "0"
+
+#define CMD_FINGERPRINT_EVENT 0xA
+#define CMD_FINGERPRINT_EVENT_DOWN 1
+#define CMD_FINGERPRINT_EVENT_UP 0
+
+static void setUdfpsHbm(bool status) {
+    android::base::WriteStringToFile(status ? UDFPS_HBM_ON : UDFPS_HBM_OFF, UDFPS_HBM_PATH);
+}
 
 // Supported fingerprint HAL version
 static const uint16_t kVersion = HARDWARE_MODULE_API_VERSION(2, 1);
@@ -353,14 +366,18 @@ void BiometricsFingerprint::notify(const fingerprint_msg_t *msg) {
 // Methods from ::android::hardware::biometrics::fingerprint::V2_3::IBiometricsFingerprint follow.
 
 Return<bool> BiometricsFingerprint::isUdfps(uint32_t) {
-    return false;
+    return true;
 }
 
 Return<void> BiometricsFingerprint::onFingerDown(uint32_t, uint32_t, float, float) {
+    setUdfpsHbm(true);
+    mDevice->send_customized_command(mDevice, CMD_FINGERPRINT_EVENT, CMD_FINGERPRINT_EVENT_DOWN);
     return Void();
 }
 
 Return<void> BiometricsFingerprint::onFingerUp() {
+    setUdfpsHbm(false);
+    mDevice->send_customized_command(mDevice, CMD_FINGERPRINT_EVENT, CMD_FINGERPRINT_EVENT_UP);
     return Void();
 }
 
