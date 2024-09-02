@@ -1,5 +1,6 @@
 # Fingerprint
 /dev/goodix_fp                                                             u:object_r:fingerprint_device:s0
+/vendor/bin/hw/android\.hardware\.biometrics\.fingerprint@2\.3-service\.otter u:object_r:hal_fingerprint_default_exec:s0
 
 # NFC
 /dev/tms_nfc                                                               u:object_r:nfc_device:s0
