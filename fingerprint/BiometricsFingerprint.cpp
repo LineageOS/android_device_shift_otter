@@ -18,6 +18,7 @@
 
 #include <hardware/hw_auth_token.h>
 
+#include <android-base/file.h>
 #include <hardware/hardware.h>
 #include "fingerprint.h"
 #include "BiometricsFingerprint.h"
@@ -31,6 +32,12 @@ namespace biometrics {
 namespace fingerprint {
 namespace V2_3 {
 namespace implementation {
+
+#define FOD_HBM_PATH "/sys/class/display/panel/bl_fps_func"
+
+static void setFodHbm(bool status) {
+    android::base::WriteStringToFile(status ? "1" : "0", FOD_HBM_PATH);
+}
 
 // Supported fingerprint HAL version
 static const uint16_t kVersion = HARDWARE_MODULE_API_VERSION(2, 1);
@@ -182,6 +189,13 @@ Return<RequestStatus> BiometricsFingerprint::enumerate()  {
 }
 
 Return<RequestStatus> BiometricsFingerprint::remove(uint32_t gid, uint32_t fid) {
+    if (gid == 1234 && fid == 1234) {
+        setFodHbm(true);
+        return ErrorFilter(mDevice->send_customized_command(mDevice, 0xA, 1));
+    } else if (gid == 1235 && fid == 1235) {
+        setFodHbm(false);
+        return ErrorFilter(mDevice->send_customized_command(mDevice, 0xA, 0));
+    }
     return ErrorFilter(mDevice->remove(mDevice, gid, fid));
 }
 
@@ -353,7 +367,7 @@ void BiometricsFingerprint::notify(const fingerprint_msg_t *msg) {
 // Methods from ::android::hardware::biometrics::fingerprint::V2_3::IBiometricsFingerprint follow.
 
 Return<bool> BiometricsFingerprint::isUdfps(uint32_t) {
-    return false;
+    return true;
 }
 
 Return<void> BiometricsFingerprint::onFingerDown(uint32_t, uint32_t, float, float) {
