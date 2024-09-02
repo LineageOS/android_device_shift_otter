@@ -5,19 +5,25 @@
 -->
 <resources>
     <!-- the padding on the top of the statusbar (usually 0) -->
-    <dimen name="status_bar_padding_top">16px</dimen>
+    <dimen name="status_bar_padding_top">18px</dimen>
 
     <!-- Height of the status bar header bar when on Keyguard -->
-    <dimen name="status_bar_header_height_keyguard">@*android:dimen/status_bar_height</dimen>
+    <dimen name="status_bar_header_height_keyguard">@null</dimen>
 
-    <dimen name="rounded_corner_content_padding">44px</dimen>
+    <dimen name="rounded_corner_content_padding">24px</dimen>
 
     <!-- Location on the screen of the center of the physical power button. -->
-    <dimen name="physical_power_button_center_screen_location_y">1105px</dimen>
+    <dimen name="physical_power_button_center_screen_location_y">800px</dimen>
 
     <!-- Location on the screen of the center of the fingerprint sensor. -->
-    <dimen name="physical_fingerprint_sensor_center_screen_location_x">1224px</dimen>
+    <dimen name="physical_fingerprint_sensor_center_screen_location_x">540px</dimen>
 
     <!-- Location on the screen of the center of the fingerprint sensor. -->
-    <dimen name="physical_fingerprint_sensor_center_screen_location_y">1105px</dimen>
+    <dimen name="physical_fingerprint_sensor_center_screen_location_y">2178px</dimen>
+
+    <!-- Whether to show a warning notification when device's skin temperature is high. -->
+    <integer name="config_showTemperatureWarning">1</integer>
+
+    <!-- Whether to show a alarm dialog when device's usb port is overheating. -->
+    <integer name="config_showUsbPortAlarm">1</integer>
 </resources>
