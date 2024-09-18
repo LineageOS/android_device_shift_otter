@@ -3,6 +3,8 @@
 
 # Fingerprint
 /dev/goodix_fp                                                             u:object_r:fingerprint_device:s0
+#/data/vendor/goodix/gf_data(/.*)?                                          u:object_r:fingerprint_data_file:s0
+#/mnt/vendor/persist/goodix(/.*)?                                           u:object_r:fingerprint_data_file:s0
 /vendor/bin/hw/android\.hardware\.biometrics\.fingerprint@2\.3-service\.otter u:object_r:hal_fingerprint_default_exec:s0
 
 # NFC
