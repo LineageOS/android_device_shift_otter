@@ -1,1 +1,11 @@
+#allow tee mnt_vendor_file:dir { search remove_name add_name create open read write map };
+#allow tee mnt_vendor_file:file { create open read write getattr map unlink };
 allow tee mnt_vendor_file:file r_file_perms;
+
+#allow tee fingerprint_data_file:dir { search remove_name add_name open read write map };
+#allow tee fingerprint_data_file:file { create open read write getattr map unlink };
+
+#allow tee tmpfs:dir { create search open read map };
+
+#allow tee vendor_data_file:dir { add_name remove_name write };
+#allow tee vendor_data_file:file { read create open write unlink };
