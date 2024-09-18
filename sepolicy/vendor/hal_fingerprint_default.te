@@ -1,3 +1,6 @@
+#type goodix_fingerprint_service, service_manager_type;
+#add_service(hal_fingerprint_default, goodix_fingerprint_vndservice)
+
 allow hal_fingerprint_default fingerprint_data_file:dir create_dir_perms;
 allow hal_fingerprint_default fingerprint_data_file:file rw_file_perms;
 allow hal_fingerprint_default fingerprint_device:chr_file rw_file_perms;
