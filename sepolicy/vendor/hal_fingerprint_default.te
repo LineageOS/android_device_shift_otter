@@ -1,8 +1,24 @@
+#type goodix_fingerprint_service, service_manager_type;
+
+#add_service(hal_fingerprint_default, goodix_fingerprint_vndservice)
+
 allow hal_fingerprint_default fingerprint_device:chr_file rw_file_perms;
 
 allow hal_fingerprint_default tee_device:chr_file rw_file_perms;
 
 allow hal_fingerprint_default self:netlink_socket create_socket_perms_no_ioctl;
 
+#allow hal_fingerprint_default uhid_device:chr_file rw_file_perms;
+
+#allow hal_fingerprint_default fingerprint_data_file:dir create_dir_perms;
+#allow hal_fingerprint_default fingerprint_data_file:file { read write getattr map };
+
+#allow hal_fingerprint_default vendor_sysfs_graphics:dir search;
+#allow hal_fingerprint_default vendor_sysfs_graphics:file rw_file_perms;
+
+#allow hal_fingerprint_default vendor_data_file:dir { add_name create remove_name search read write map };
+#allow hal_fingerprint_default vendor_data_file:file { create getattr open read write };
+
+#set_prop(hal_fingerprint_default, vendor_system_prop)
 # gf.debug.fp_vendor
 dontaudit hal_fingerprint_default default_prop:property_service set;

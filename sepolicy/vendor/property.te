@@ -1,0 +1,5 @@
+# NFC
+#type vendor_secure_element_prop, vendor_property_type;
+#type vendor_wired_se_prop, vendor_property_type;
+#type vendor_trusted_se_prop, vendor_property_type;
+#vendor_restricted_prop(vendor_tms_nfc_prop)
