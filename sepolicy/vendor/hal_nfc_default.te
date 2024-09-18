@@ -1,1 +1,11 @@
 allow hal_nfc_default tmsnfc_hwservice:hwservice_manager { add find };
+
+#allow hal_nfc_default nfc_device:chr_file { read write };
+#allow hal_nfc_default nfc_data_file:file getattr;
+
+#allow hal_nfc_default vendor_nfc_vendor_data_file:dir { getattr add_name read write search remove_name };
+#allow hal_nfc_default vendor_nfc_vendor_data_file:file { getattr open create read write unlink setattr append };
+
+#allow hal_nfc_default vendor_tms_nfc_prop:property_service { set };
+#allow hal_nfc_default sysfs_chip_name:file { open read getattr };
+#allow hal_nfc_default ctl_stop_prop:property_service { set };
