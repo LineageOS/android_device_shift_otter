@@ -1,5 +1,8 @@
 # Fingerprint
 vendor.goodix.hardware.biometrics.fingerprint::IGoodixFingerprintDaemon         u:object_r:hal_fingerprint_hwservice:s0
+#vendor.goodix.hardware.biometrics.fingerprint::IGoodixFingerprintDaemonExt      u:object_r:hal_fingerprint_hwservice:s0
+#vendor.goodix.hardware.biometrics.fingerprint::IGoodixFingerprintDaemonHbd      u:object_r:hal_fingerprint_hwservice:s0
+#vendor.goodix.hardware.biometrics.fingerprint::IGoodixFingerprintDaemonFido     u:object_r:hal_fingerprint_hwservice:s0
 
 # NFC
 vendor.tms.tmsnfc::ITmsNfc                                                      u:object_r:tmsnfc_hwservice:s0
