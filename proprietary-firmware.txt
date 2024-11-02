@@ -1,4 +1,4 @@
-# Firmware from SHIFT/otter/otter:14/SOS.6.0.20240927/20240927:user/release-keys
+# Firmware from SHIFT/otter/otter:14/SOS.6.0.20241030/20241030:user/release-keys
 
 abl.elf:abl.img;AB
 aop.mbn:aop.img;AB
