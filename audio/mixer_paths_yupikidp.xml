@@ -490,6 +490,8 @@
     <ctl name="WSA_CDC_DMA_RX_0 Port Mixer SEC_MI2S_TX" value="0"/>
     <ctl name="MultiMedia1 Mixer PRI_MI2S_TX" value="0"/>
     <ctl name="MultiMedia17 Mixer PRI_MI2S_TX" value="0"/>
+    <ctl name="Configuration" value="0"/>
+    <ctl name="TASDEVICE Profile id" value="0"/>
     <path name="speaker-and-haptics"/>
     <path name="gsm-mode">
         <ctl name="GSM mode Enable" value="ON"/>
@@ -2120,22 +2122,6 @@
         <ctl name="ADC4_MIXER Switch" value="1"/>
         <ctl name="ADC4 MUX" value="INP5"/>
     </path>
-    <path name="speaker">
-        <ctl name="PRIM_MI2S_RX Channels" value="Two"/>
-        <ctl name="WSA RX0 MUX" value="AIF1_PB"/>
-        <ctl name="WSA RX1 MUX" value="AIF1_PB"/>
-        <ctl name="WSA_RX0 INP0" value="RX0"/>
-        <ctl name="WSA_RX1 INP0" value="RX1"/>
-        <ctl name="WSA_COMP1 Switch" value="1"/>
-        <ctl name="WSA_COMP2 Switch" value="1"/>
-        <ctl name="SpkrLeft COMP Switch" value="1"/>
-        <ctl name="SpkrLeft VISENSE Switch" value="1"/>
-        <ctl name="SpkrLeft SWR DAC_Port Switch" value="1"/>
-        <ctl name="SpkrRight COMP Switch" value="1"/>
-        <ctl name="SpkrRight VISENSE Switch" value="1"/>
-        <ctl name="SpkrRight SWR DAC_Port Switch" value="1"/>
-        <ctl name="TASDEVICE Profile id" value="0"/>
-    </path>
     <path name="haptics">
         <ctl name="SWR DAC_Port Switch" value="1"/>
     </path>
@@ -2166,6 +2152,23 @@
     <path name="speaker-vbat-mono-2">
         <path name="speaker-mono-2"/>
         <ctl name="WSA_RX INT1 VBAT WSA RX1 VBAT Enable" value="1"/>
+    </path>
+    <path name="speaker">
+        <ctl name="PRIM_MI2S_RX Channels" value="Two"/>
+        <ctl name="WSA RX0 MUX" value="AIF1_PB"/>
+        <ctl name="WSA RX1 MUX" value="AIF1_PB"/>
+        <ctl name="WSA_RX0 INP0" value="RX0"/>
+        <ctl name="WSA_RX1 INP0" value="RX1"/>
+        <ctl name="WSA_COMP1 Switch" value="1"/>
+        <ctl name="WSA_COMP2 Switch" value="1"/>
+        <ctl name="SpkrLeft COMP Switch" value="1"/>
+        <ctl name="SpkrLeft VISENSE Switch" value="1"/>
+        <ctl name="SpkrLeft SWR DAC_Port Switch" value="1"/>
+        <ctl name="SpkrRight COMP Switch" value="1"/>
+        <ctl name="SpkrRight VISENSE Switch" value="1"/>
+        <ctl name="SpkrRight SWR DAC_Port Switch" value="1"/>
+        <ctl name="Configuration" value="0"/>
+        <ctl name="TASDEVICE Profile id" value="0"/>
     </path>
     <path name="speaker-vbat">
         <path name="speaker"/>
@@ -2262,17 +2265,6 @@
     <path name="vi-feedback"/>
     <path name="vi-feedback-mono-1"/>
     <path name="vi-feedback-mono-2"/>
-    <path name="handset">
-        <ctl name="PRIM_MI2S_RX Channels" value="Two"/>
-        <ctl name="WSA RX0 MUX" value="AIF1_PB"/>
-        <ctl name="WSA_RX0 INP0" value="RX0"/>
-        <ctl name="WSA_COMP1 Switch" value="1"/>
-        <ctl name="SpkrLeft COMP Switch" value="1"/>
-        <ctl name="SpkrLeft VISENSE Switch" value="1"/>
-        <ctl name="SpkrLeft SWR DAC_Port Switch" value="1"/>
-        <ctl name="EAR SPKR PA Gain" value="G_6_DB"/>
-        <ctl name="TASDEVICE Profile id" value="3"/>
-    </path>
     <path name="headphones">
         <ctl name="RX_MACRO RX0 MUX" value="AIF1_PB"/>
         <ctl name="RX_MACRO RX1 MUX" value="AIF1_PB"/>
@@ -2307,6 +2299,18 @@
     </path>
     <path name="headset-mic-liquid">
         <path name="amic2"/>
+    </path>
+    <path name="handset">
+        <ctl name="PRIM_MI2S_RX Channels" value="Two"/>
+        <ctl name="WSA RX0 MUX" value="AIF1_PB"/>
+        <ctl name="WSA_RX0 INP0" value="RX0"/>
+        <ctl name="WSA_COMP1 Switch" value="1"/>
+        <ctl name="SpkrLeft COMP Switch" value="1"/>
+        <ctl name="SpkrLeft VISENSE Switch" value="1"/>
+        <ctl name="SpkrLeft SWR DAC_Port Switch" value="1"/>
+        <ctl name="EAR SPKR PA Gain" value="G_6_DB"/>
+        <ctl name="Configuration" value="2"/>
+        <ctl name="TASDEVICE Profile id" value="9"/>
     </path>
     <path name="voice-handset">
         <path name="handset"/>
@@ -2624,7 +2628,7 @@
         <path name="voice-tty-full-usb-mic"/>
     </path>
     <path name="ADSP testfwk">
-        <ctl name="PRIM_MI2S_RX_DL_HL Switch" value="1"/>
+        <ctl name="PRI_MI2S_RX_DL_HL Switch" value="1"/>
     </path>
     <path name="bt-a2dp">
         <ctl name="SLIM7_RX ADM Channels" value="Two"/>
@@ -2742,7 +2746,7 @@
         <path name="audio-ull-playback"/>
     </path>
     <path name="mmap-playback">
-        <ctl name="PRIM_MI2S_RX Audio Mixer MultiMedia16" value="1"/>
+        <ctl name="PRI_MI2S_RX Audio Mixer MultiMedia16" value="1"/>
     </path>
     <path name="mmap-playback headphones">
         <ctl name="RX_CDC_DMA_RX_0 Audio Mixer MultiMedia16" value="1"/>
