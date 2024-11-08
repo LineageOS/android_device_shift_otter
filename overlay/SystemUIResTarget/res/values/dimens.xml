@@ -20,10 +20,4 @@
 
     <!-- Location on the screen of the center of the fingerprint sensor. -->
     <dimen name="physical_fingerprint_sensor_center_screen_location_y">2178px</dimen>
-
-    <!-- Whether to show a warning notification when device's skin temperature is high. -->
-    <integer name="config_showTemperatureWarning">1</integer>
-
-    <!-- Whether to show a alarm dialog when device's usb port is overheating. -->
-    <integer name="config_showUsbPortAlarm">1</integer>
 </resources>
