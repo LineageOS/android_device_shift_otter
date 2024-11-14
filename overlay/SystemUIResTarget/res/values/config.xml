@@ -14,9 +14,9 @@
       DisplayCutout path will be rendered
        -->
     <string translatable="false" name="config_frontBuiltInDisplayCutoutProtection">
-        M 503,46.5
-        a 37,37 0 1 0 74,0
-        a 37,37 0 1 0 -74,0
+        M 497,46.5
+        a 43,43 0 1,0 86,0
+        a 43,43 0 1,0 -86,0
         Z
     </string>
 
