@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6833fcaa_15a51b9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2024-11-29T23:27:09Z",
+      "side": 1,
+      "message": "I\u0027ll squash this to https://review.lineageos.org/c/LineageOS/android_device_shift_otter/+/403147 and abandon https://review.lineageos.org/c/LineageOS/android_device_shift_otter/+/407564",
+      "revId": "fe66a825ea2a1101423ee3b68e394f822f1a9191",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
