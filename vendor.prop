@@ -120,6 +120,7 @@ persist.vendor.dpmhalservice.enable=1
 drm.service.enabled=true
 
 # FM
+vendor.qcom.bluetooth.soc=moselle
 vendor.hw.fm.init=0
 
 # FRP
