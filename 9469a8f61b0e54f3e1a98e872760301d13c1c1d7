@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "920bedcc_9db368f6",
+        "filename": "overlay/EuiccOverlay/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2024-12-05T15:40:20Z",
+      "side": 1,
+      "message": "Do we need all this?",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 28
+      },
+      "revId": "9469a8f61b0e54f3e1a98e872760301d13c1c1d7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39002c40_8c974f16",
+        "filename": "overlay/EuiccOverlay/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2024-12-05T15:40:20Z",
+      "side": 1,
+      "message": "same",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 6
+      },
+      "revId": "9469a8f61b0e54f3e1a98e872760301d13c1c1d7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
