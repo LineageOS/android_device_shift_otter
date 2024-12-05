@@ -460,7 +460,6 @@ vendor/lib64/vendor.qti.esepowermanager@1.0.so
 vendor/lib64/vendor.qti.esepowermanager@1.1.so
 
 # Euicc
-system/app/EuiccOverlay/EuiccOverlay.apk
 system/priv-app/EuiccGoogle/EuiccGoogle.apk;PRESIGNED
 
 # Feature enabler client

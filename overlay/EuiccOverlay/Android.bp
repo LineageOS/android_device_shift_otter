@@ -1,0 +1,14 @@
+// EuiccOverlay
+
+android_app {
+    name: "EuiccOverlay",
+    platform_apis: true,
+
+    certificate: "platform",
+    srcs: ["src/**/*.java"],
+    resource_dirs: ["res"],
+    enforce_uses_libs: false,
+    dex_preopt: {
+        enabled: false,
+    },
+}
