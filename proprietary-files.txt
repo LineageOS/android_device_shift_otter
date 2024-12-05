@@ -108,7 +108,7 @@ vendor/lib64/libjnihelper.so
 vendor/lib64/vendor.qti.hardware.cacert@1.0.so
 
 # Camera
-vendor/etc/init/android.hardware.camera.provider@2.4-service_64.rc:vendor/etc/init/android.hardware.camera.provider@2.4-service_64-qti.rc
+vendor/etc/init/android.hardware.camera.provider@2.4-service_64.rc:vendor/etc/init/android.hardware.camera.provider@2.4-service_qti_64.rc
 vendor/lib64/camera/com.qti.sensor.imx616.so
 vendor/lib64/camera/com.qti.sensor.imx766_mjy.so
 vendor/lib64/camera/com.qti.sensor.imx766_mjy_aux.so
