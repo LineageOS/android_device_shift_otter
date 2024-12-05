@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "694a48ee_60114aad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 29415
+      },
+      "writtenOn": "2024-12-05T20:18:25Z",
+      "side": 1,
+      "message": "Can you test without this and with the following commit in host_init_verifier?\n\nhttps://review.lineageos.org/c/LineageOS/android_system_core/+/410878",
+      "revId": "9add8699945adca7487a42ef8b844687e73a870e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
