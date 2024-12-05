@@ -191,3 +191,6 @@ WPA_SUPPLICANT_VERSION := VER_0_8_X
 
 # Inherit the proprietary files
 include vendor/shift/otter/BoardConfigVendor.mk
+
+# Include ShiftOS specific BoardConfig if existing
+-include device/shift/otter/shiftos/BoardConfig.mk
