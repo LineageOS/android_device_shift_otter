@@ -28,5 +28,5 @@ PRODUCT_MANUFACTURER := SHIFT
 PRODUCT_GMS_CLIENTID_BASE := android-uniscope
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    BuildFingerprint=SHIFT/otter/otter:14/SOS.6.0.20241030/20241030:user/release-keys \
+    BuildFingerprint=SHIFT/otter/otter:14/SOS.6.0.20241128/20241128:user/release-keys \
     DeviceProduct=otter
