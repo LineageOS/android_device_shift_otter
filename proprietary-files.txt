@@ -114,10 +114,12 @@ vendor/lib64/camera/com.qti.sensor.imx766_mjy_aux.so
 vendor/lib64/camera/com.qti.sensormodule.mingjiaying_imx616.bin
 vendor/lib64/camera/com.qti.sensormodule.mingjiaying_imx766.bin
 vendor/lib64/camera/com.qti.sensormodule.mingjiaying_imx766_aux.bin
+vendor/lib64/camera/com.qti.sensormodule.mjy_imx616.bin
 vendor/lib64/camera/com.qti.tuned.default.bin
 vendor/lib64/camera/com.qti.tuned.mingjiaying_imx616.bin
 vendor/lib64/camera/com.qti.tuned.mingjiaying_imx766.bin
 vendor/lib64/camera/com.qti.tuned.mingjiaying_imx766_aux.bin
+vendor/lib64/camera/com.qti.tuned.mjy_imx616.bin
 vendor/lib64/camera/fdconfigpreview.bin
 vendor/lib64/camera/fdconfigpreviewlite.bin
 vendor/lib64/camera/fdconfigvideo.bin

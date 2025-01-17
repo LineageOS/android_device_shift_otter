@@ -157,7 +157,7 @@ ENABLE_VENDOR_RIL_SERVICE := true
 
 # Security patch level
 BOOT_SECURITY_PATCH := 2024-10-05
-VENDOR_SECURITY_PATCH := 2024-10-05
+VENDOR_SECURITY_PATCH := 2024-03-05
 
 # SEPolicy
 include device/qcom/sepolicy_vndr/SEPolicy.mk

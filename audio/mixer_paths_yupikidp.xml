@@ -3517,8 +3517,8 @@
     </path>
     <path name="play-fm">
         <ctl name="SEC MI2S LOOPBACK Volume" value="1"/>
-        <ctl name="WSA_CDC_DMA_RX_0 Port Mixer SEC_MI2S_TX" value="1"/>
-        <ctl name="WSA_CDC_DMA_RX_0_DL_HL Switch" value="1"/>
+        <ctl name="PRI_MI2S_RX Port Mixer SEC_MI2S_TX" value="1"/>
+        <ctl name="PRI_MI2S_RX_DL_HL Switch" value="1"/>
     </path>
     <path name="mmap-record capture-fm">
         <ctl name="MultiMedia16 Mixer SEC_MI2S_TX" value="1"/>
