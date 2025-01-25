@@ -487,3 +487,6 @@ firmware_directories /vendor/firmware_mnt/image/
 
 # Battery
 /sys/class/qcom-battery                                 charging_enabled                0660    system  system
+
+# Touchscreen
+/sys/devices/platform/soc/a94000.i2c/i2c-3/3-0038       fts_gesture_mode                0660    system  system
