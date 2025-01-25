@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbb62d84_5978247e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2025-01-25T15:30:37Z",
+      "side": 1,
+      "message": "Setup is the correct way to do things, but it doesn\u0027t wake the device here",
+      "revId": "0de2607f1f2247b205b0f20ca2a3bc521fd66627",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
