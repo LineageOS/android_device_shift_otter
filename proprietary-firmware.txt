@@ -1,4 +1,4 @@
-# Firmware from SHIFT/otter/otter:14/SOS.6.1.20250417/20250417:user/release-keys
+# All firmware images below are extracted from the release mentioned in proprietary-files.txt
 
 abl.elf:abl.img;AB
 aop.mbn:aop.img;AB
