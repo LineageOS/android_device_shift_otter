@@ -136,11 +136,11 @@ PRODUCT_PACKAGES += \
 
 # e-SIM
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/default-permissions_com.google.android.euicc.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/default-permissions/default-permissions_com.google.android.euicc.xml \
-    $(LOCAL_PATH)/configs/privapp_allowlist_com.google.android.euicc.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp_allowlist_com.google.android.euicc.xml
+    $(LOCAL_PATH)/configs/default-permissions_com.google.android.euicc.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/default-permissions/default-permissions_com.google.android.euicc.xml \
+    $(LOCAL_PATH)/configs/privapp_allowlist_com.google.android.euicc.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp_allowlist_com.google.android.euicc.xml
 
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.telephony.euicc.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.hardware.telephony.euicc.xml
+    frameworks/native/data/etc/android.hardware.telephony.euicc.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/android.hardware.telephony.euicc.xml
 
 # fastbootd
 PRODUCT_PACKAGES += \
@@ -386,10 +386,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     firmware_WCNSS_qcom_cfg.ini_symlink \
     firmware_wlan_mac.bin_symlink
-
-# WiFi Display
-PRODUCT_BOOT_JARS += \
-    WfdCommon
 
 # Inherit from the proprietary files makefile.
 $(call inherit-product, vendor/shift/otter/otter-vendor.mk)

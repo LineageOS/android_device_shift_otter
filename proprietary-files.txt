@@ -1,4 +1,4 @@
-# Unpinned blobs from SHIFT/otter/otter:14/SOS.6.0.20241030/20241030:user/release-keys
+# Unpinned blobs from SHIFT/otter/otter:14/SOS.6.1.20250124/20250124:user/release-keys
 
 # Current blobs with ELF checks disabled:
 # libcne, libwqe, lowi-server, mutualex depend on libwpa_client, which is a gnu makefile target
@@ -460,8 +460,8 @@ vendor/lib64/vendor.qti.esepowermanager@1.0.so
 vendor/lib64/vendor.qti.esepowermanager@1.1.so
 
 # Euicc
-system/app/EuiccOverlay/EuiccOverlay.apk
-system/priv-app/EuiccGoogle/EuiccGoogle.apk;PRESIGNED
+product/app/EuiccOverlay/EuiccOverlay.apk
+product/priv-app/EuiccGoogle/EuiccGoogle.apk;PRESIGNED
 
 # Feature enabler client
 vendor/bin/feature_enabler_client
@@ -892,14 +892,6 @@ vendor/etc/init/ssgtzd.rc
 vendor/etc/init/vendor.qti.rmt_storage.rc
 vendor/etc/init/vendor.qti.tftp.rc
 vendor/etc/qcril_database/qcrilNr.db
-vendor/etc/qcril_database/upgrade/config/10.0_config.sql
-vendor/etc/qcril_database/upgrade/config/11.0_config.sql
-vendor/etc/qcril_database/upgrade/config/12.0_config.sql
-vendor/etc/qcril_database/upgrade/config/13.0_config.sql
-vendor/etc/qcril_database/upgrade/config/6.0_config.sql
-vendor/etc/qcril_database/upgrade/config/7.0_config.sql
-vendor/etc/qcril_database/upgrade/config/8.0_config.sql
-vendor/etc/qcril_database/upgrade/config/9.0_config.sql
 vendor/etc/qcril_database/upgrade/other/0_initial_qcrilnr.sql
 vendor/etc/qcril_database/upgrade/other/10_version_update_ecc_table.sql
 vendor/etc/qcril_database/upgrade/other/11_version_update_ecc_table.sql
@@ -1153,7 +1145,8 @@ vendor/etc/wifi/qca6750/WCNSS_qcom_cfg.ini
 vendor/etc/wifi/wpa_supplicant_overlay.conf
 
 # WiFi Display (system)
-system/framework/WfdCommon.jar
+system_ext/etc/permissions/WfdCommon.xml
+system_ext/framework/WfdCommon.jar
 system_ext/bin/wfdservice
 system_ext/etc/init/wfdservice.rc
 system_ext/etc/permissions/wfd-system-ext-privapp-permissions-qti.xml
@@ -1181,6 +1174,7 @@ system_ext/lib/libwfduibcsinkinterface.so
 system_ext/lib/libwfduibcsrc.so
 system_ext/lib/libwfduibcsrcinterface.so
 system_ext/lib/vendor.qti.hardware.wifidisplaysession@1.0.so
+system_ext/lib/vendor.qti.hardware.wifidisplaysession@2.0.so
 system_ext/lib64/libmmosal.so
 system_ext/lib64/libmmparser_lite.so
 system_ext/lib64/libmmrtpdecoder.so
