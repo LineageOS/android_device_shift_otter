@@ -36,7 +36,6 @@ on early-init
     write /proc/sys/kernel/sched_boost 1
     wait /sys/devices/soc0/soc_id
     chmod 666 /sys/bus/i2c/devices/3-0038/fts_wakeup_fp
-    chmod 666 /sys/bus/i2c/devices/3-0038/fts_gesture_mode
 
 on init
     # Scheduler uclamp
