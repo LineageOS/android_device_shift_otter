@@ -1,4 +1,4 @@
-# Unpinned blobs from SHIFT/otter/otter:14/SOS.6.0.20250123/20250123:user/release-keys
+# Unpinned blobs from SHIFT/otter/otter:14/SOS.6.2.20250624/20250624:user/release-keys
 
 # ACDB
 vendor/etc/acdbdata/IDP/lahaina-yupikidp-snd-card/IDP_Yupik_Bluetooth_cal.acdb
@@ -457,8 +457,8 @@ vendor/lib64/vendor.qti.esepowermanager@1.0.so
 vendor/lib64/vendor.qti.esepowermanager@1.1.so
 
 # Euicc
-system/app/EuiccOverlay/EuiccOverlay.apk
-system/priv-app/EuiccGoogle/EuiccGoogle.apk;PRESIGNED
+product/app/EuiccOverlay/EuiccOverlay.apk
+product/priv-app/EuiccGoogle/EuiccGoogle.apk;PRESIGNED
 
 # Feature enabler client
 vendor/bin/feature_enabler_client
