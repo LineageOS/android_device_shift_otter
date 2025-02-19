@@ -212,6 +212,10 @@ PRODUCT_ENABLE_UFFD_GC := false
 PRODUCT_PACKAGES += \
     android.hardware.hardware_keystore.km41.xml
 
+# Lights
+PRODUCT_PACKAGES += \
+    android.hardware.light-service.lineage
+
 # Lineage Health
 PRODUCT_PACKAGES += \
     vendor.lineage.health-service.default
