@@ -42,7 +42,6 @@ PRODUCT_PACKAGES += \
     audio.usb.default \
     audioadsprpcd \
     liba2dpoffload \
-    libbatterylistener \
     libcirrusspkrprot \
     libcomprcapture \
     libexthwplugin \
