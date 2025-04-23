@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fb50b8e_929e09dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19282
+      },
+      "writtenOn": "2025-04-23T17:03:01Z",
+      "side": 1,
+      "message": "https://github.com/TheMuppets/proprietary_vendor_shift_otter/pull/2",
+      "revId": "b2eb7f4bf3b21627600e83225b3696aeefa53dd9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
