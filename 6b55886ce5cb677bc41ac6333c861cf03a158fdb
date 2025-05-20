@@ -1,4 +1,22 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b743108_2499faeb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19282
+      },
+      "writtenOn": "2025-05-20T06:20:13Z",
+      "side": 1,
+      "message": "As FYI, v12 should solve the \"taps on status bar detected as swipes\" issue, double tap status bar to sleep is working for me.",
+      "revId": "6b55886ce5cb677bc41ac6333c861cf03a158fdb",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ],
   "submitRequirementResults": []
 }
