@@ -60,6 +60,10 @@
 
 #define DGNSS_RANGE_UPDATE_TIME_10MIN_IN_MILLI  600000
 
+// Modem E-911 callflow will not accept CPI injection with horizontal unc
+// more than 200 meters of 90% confidence, which is 136.0 meters of 68% confidence
+#define E_911_LOC_ACCURACY_THRESHOLD_IN_METERS   136.0f
+
 using namespace loc_core;
 
 static int loadEngHubForExternalEngine = 0;
@@ -120,6 +124,9 @@ GnssAdapter::GnssAdapter() :
     mCdfwInterface(nullptr),
     mDGnssNeedReport(false),
     mDGnssDataUsage(false),
+    mInEmergency(false),
+    mInjectedWifiFix{},
+    mInjectedWifiFixUsed(true),
     mOdcpiRequestCb(nullptr),
     mOdcpiRequestActive(false),
     mCallbackPriority(OdcpiPrioritytype::ODCPI_HANDLER_PRIORITY_LOW),
@@ -2263,6 +2270,7 @@ GnssAdapter::injectLocationCommand(double latitude, double longitude, float accu
              __func__, latitude, longitude, accuracy);
 
     struct MsgInjectLocation : public LocMsg {
+        GnssAdapter& mAdapter;
         LocApiBase& mApi;
         ContextBase& mContext;
         BlockCPIInfo& mBlockCPI;
@@ -2270,7 +2278,8 @@ GnssAdapter::injectLocationCommand(double latitude, double longitude, float accu
         double mLongitude;
         float mAccuracy;
         bool mOnDemandCpi;
-        inline MsgInjectLocation(LocApiBase& api,
+        inline MsgInjectLocation(GnssAdapter& adapter,
+                                 LocApiBase& api,
                                  ContextBase& context,
                                  BlockCPIInfo& blockCPIInfo,
                                  double latitude,
@@ -2278,6 +2287,7 @@ GnssAdapter::injectLocationCommand(double latitude, double longitude, float accu
                                  float accuracy,
                                  bool onDemandCpi) :
             LocMsg(),
+            mAdapter(adapter),
             mApi(api),
             mContext(context),
             mBlockCPI(blockCPIInfo),
@@ -2285,6 +2295,7 @@ GnssAdapter::injectLocationCommand(double latitude, double longitude, float accu
             mLongitude(longitude),
             mAccuracy(accuracy),
             mOnDemandCpi(onDemandCpi) {}
+
         inline virtual void proc() const {
             if ((uptimeMillis() <= mBlockCPI.blockedTillTsMs) &&
                 (fabs(mLatitude-mBlockCPI.latitude) <= mBlockCPI.latLonDiffThreshold) &&
@@ -2292,14 +2303,48 @@ GnssAdapter::injectLocationCommand(double latitude, double longitude, float accu
 
                 LOC_LOGD("%s]: positon injection blocked: lat: %f, lon: %f, accuracy: %f",
                          __func__, mLatitude, mLongitude, mAccuracy);
-
-            } else {
-                mApi.injectPosition(mLatitude, mLongitude, mAccuracy, mOnDemandCpi);
+              return;
             }
+            // if device is in emergecny, we cache the location and
+            // use it if fused fix from modem can not be used for E-911
+            if (mAdapter.mInEmergency) {
+               mAdapter.mInjectedWifiFix = {};
+
+               mAdapter.mInjectedWifiFix.size = sizeof(mAdapter.mInjectedWifiFix);
+               mAdapter.mInjectedWifiFix.flags |=
+                     (LOC_GPS_LOCATION_HAS_LAT_LONG | LOC_GPS_LOCATION_HAS_ACCURACY);
+               mAdapter.mInjectedWifiFix.latitude = mLatitude;
+               mAdapter.mInjectedWifiFix.longitude = mLongitude;
+               mAdapter.mInjectedWifiFix.accuracy = mAccuracy;
+
+               // fill in timestamp and elapsed real time
+               struct timespec time_info_current = {};
+               if(clock_gettime(CLOCK_REALTIME,&time_info_current) == 0) {
+                  mAdapter.mInjectedWifiFix.timestamp = (time_info_current.tv_sec)*1e3 +
+                        (time_info_current.tv_nsec)/1e6;
+               }
+               mAdapter.mInjectedWifiFix.elapsedRealTime = getBootTimeMilliSec() * 1000000;
+               // hard code this to 1 sec (E-911 FLP session has 1 second tbf)
+               mAdapter.mInjectedWifiFix.elapsedRealTimeUnc = 1,000,000,000;
+
+               // mark this wifi fix not used
+               mAdapter.mInjectedWifiFixUsed = false;
+            }
+
+            LOC_LOGd("Saving injected wifi fix, mInEmergency %d, used: %d, fix info: %f %f %f,"
+                     " %" PRIu64 " %" PRIu64 "",
+                     mAdapter.mInEmergency, mAdapter.mInjectedWifiFixUsed,
+                     mAdapter.mInjectedWifiFix.latitude,
+                     mAdapter.mInjectedWifiFix.longitude,
+                     mAdapter.mInjectedWifiFix.accuracy,
+                     mAdapter.mInjectedWifiFix.timestamp,
+                     mAdapter.mInjectedWifiFix.elapsedRealTime);
+
+            mApi.injectPosition(mLatitude, mLongitude, mAccuracy, mOnDemandCpi);
         }
     };
 
-    sendMsg(new MsgInjectLocation(*mLocApi, *mContext, mBlockCPIInfo,
+    sendMsg(new MsgInjectLocation(*this, *mLocApi, *mContext, mBlockCPIInfo,
                                   latitude, longitude, accuracy, mOdcpiRequestActive));
 }
 
@@ -3675,8 +3720,8 @@ GnssAdapter::reportPositionEvent(const UlpLocation& ulpLocation,
         GnssAdapter& mAdapter;
         mutable UlpLocation mUlpLocation;
         mutable GpsLocationExtended mLocationExtended;
-        enum loc_sess_status mStatus;
-        LocPosTechMask mTechMask;
+        mutable enum loc_sess_status mStatus;
+        mutable LocPosTechMask mTechMask;
         mutable GnssDataNotification mDataNotify;
         int mMsInWeek;
 
@@ -3700,6 +3745,59 @@ GnssAdapter::reportPositionEvent(const UlpLocation& ulpLocation,
                 mAdapter.mDistanceBasedTrackingSessions.empty()) {
                 LOC_LOGd("reportPositionEvent, no session on-going, throw away the SPE reports");
                 return;
+            }
+            if (mAdapter.mInEmergency) {
+               bool useCachedWifiFix = false;
+               const LocGpsLocation& gpsLoc = mUlpLocation.gpsLocation;
+
+               LOC_LOGd("E-911 case, sess status %d, flags 0x%x, tech mask 0x%x, lat %f, "
+                        "lon %f, accuracy %f",
+                        mStatus, gpsLoc.flags, mTechMask, gpsLoc.latitude,
+                        gpsLoc.longitude, gpsLoc.accuracy);
+
+               // modem reports out intermediate fix
+               // case 1: the reported fix is from injected wifi fix, e.g.: device is deep indoor,
+               //         use the injected wifi fix for E-911 once
+               // case 2: the reported fix is a combination of wifi fix and other technology,
+               //         if the accuracy exceeds E-911 threshold, use the injected wifi fix once
+               if (mStatus != LOC_SESS_SUCCESS) {
+                  LocPosTechMask otherMask = ~(LOC_POS_TECH_MASK_WIFI |
+                                               LOC_POS_TECH_MASK_INJECTED_COARSE_POSITION);
+                  // the reported fix is from injected wifi fix, e.g.: device is deep indoor
+                  if ((mTechMask & otherMask) == 0) {
+                     useCachedWifiFix = true;
+                  } else {
+                     if (!(gpsLoc.flags & LOC_GPS_LOCATION_HAS_ACCURACY) ||
+                          (gpsLoc.accuracy >= E_911_LOC_ACCURACY_THRESHOLD_IN_METERS)) {
+                        useCachedWifiFix = true;
+                     }
+                  }
+
+                  if (useCachedWifiFix) {
+                     // this fix has not yet used in E911 callflow
+                     if (false == mAdapter.mInjectedWifiFixUsed) {
+                        // copy the wifi fix into E-911 callflow
+                        mUlpLocation.gpsLocation = mAdapter.mInjectedWifiFix;
+                        mTechMask = LOC_POS_TECH_MASK_WIFI;
+                        mLocationExtended.flags &= ~GPS_LOCATION_EXTENDED_HAS_GNSS_SV_USED_DATA;
+                     } else {
+                        // this fix is already used in E-911 callflow and there is no new wifi fix
+                        // so mark session status as failure so we avoid duplicate reporting out
+                        // the same fix
+                        mStatus = LOC_SESS_FAILURE;
+                        mUlpLocation.gpsLocation = {};
+                     }
+                  }
+               }
+               // mark it used, so it will not be used again
+               mAdapter.mInjectedWifiFixUsed = true;
+
+               LOC_LOGd("E-911 case, useCachedWifiFix %d, fused fix to report out: "
+                        "sess status %d, tech mask 0x%x, flags 0x%x, lat %f, lon %f, accuracy %f, "
+                        "timestamp %" PRIu64 " msec",
+                        useCachedWifiFix, mStatus, mTechMask, mUlpLocation.gpsLocation.flags,
+                        mUlpLocation.gpsLocation.latitude, mUlpLocation.gpsLocation.longitude,
+                        mUlpLocation.gpsLocation.accuracy, mUlpLocation.gpsLocation.timestamp);
             }
 
             if (false == mUlpLocation.unpropagatedPosition && mDataNotify.size != 0) {
@@ -4776,7 +4874,7 @@ GnssAdapter::requestOdcpiEvent(OdcpiRequestInfo& request)
 void GnssAdapter::requestOdcpi(const OdcpiRequestInfo& request)
 {
     if (nullptr != mOdcpiRequestCb) {
-	bool sendEmergencyCallStatusEvent = false;
+    bool sendEmergencyCallStatusEvent = false;
         LOC_LOGd("request: type %d, tbf %d, isEmergency %d"
                  " requestActive: %d timerActive: %d",
                  request.type, request.tbfMillis, request.isEmergencyMode,
@@ -4786,6 +4884,7 @@ void GnssAdapter::requestOdcpi(const OdcpiRequestInfo& request)
         // extending the odcpi session past 30 seconds if needed
 
         if (ODCPI_REQUEST_TYPE_START == request.type) {
+            mInEmergency = request.isEmergencyMode;
             if (!(mOdcpiStateMask & ODCPI_REQ_ACTIVE)  && false == mOdcpiTimer.isActive()) {
                 fireOdcpiRequest(request);
                 mOdcpiStateMask |= ODCPI_REQ_ACTIVE;
@@ -5023,6 +5122,9 @@ void GnssAdapter::odcpiTimerExpire()
         fireOdcpiRequest(mOdcpiRequest);
         mOdcpiTimer.restart();
     } else {
+        mInEmergency = false;
+        mInjectedWifiFix = {};
+        mInjectedWifiFixUsed = true;
         mOdcpiTimer.stop();
     }
 }
