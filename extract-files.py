@@ -47,6 +47,11 @@ blob_fixups: blob_fixups_user_type = {
         .add_needed('libinput_shim.so'),
     'vendor/lib64/hw/fingerprint.lahaina.so': blob_fixup()
         .fix_soname(),
+    (
+        'vendor/lib64/libdpps.so',
+        'vendor/lib64/libsnapdragoncolor-manager.so',
+    ): blob_fixup()
+        .replace_needed('libtinyxml2.so', 'libtinyxml2-v34.so'),
     'vendor/lib64/libmorpho_movie_stabilizer.so': blob_fixup()
         .clear_symbol_version('AHardwareBuffer_acquire')
         .clear_symbol_version('AHardwareBuffer_describe')
