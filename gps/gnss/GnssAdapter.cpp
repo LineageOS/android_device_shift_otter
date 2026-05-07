@@ -3804,7 +3804,7 @@ GnssAdapter::needReportForGnssClient(const UlpLocation& ulpLocation,
 
 bool
 GnssAdapter::needReportForFlpClient(enum loc_sess_status status,
-                                    LocPosTechMask techMask) {
+                                    LocPosTechMask /*techMask*/) {
     if (LOC_SESS_FAILURE == status) {
         return false;
     } else {
