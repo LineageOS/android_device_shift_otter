@@ -1,4 +1,4 @@
-# Unpinned blobs from SHIFT/otter/otter:14/SOS.6.6.20260507/20260507:user/release-keys
+# Unpinned blobs from SHIFT/otter/otter:14/SOS.6.7.20260712/20260712:user/release-keys
 
 # ACDB
 vendor/etc/acdbdata/IDP/lahaina-yupikidp-snd-card/IDP_Yupik_Bluetooth_cal.acdb
@@ -465,7 +465,7 @@ vendor/etc/init/feature_enabler_client.rc
 
 # Fingerprint
 vendor/lib64/hw/fingerprint.default.so:vendor/lib64/hw/fingerprint.lahaina.so
-vendor/lib64/libgf_hal.so|72fee8d4eed85861d9f78bec20cc47dca5a27b9a
+vendor/lib64/libgf_hal.so
 vendor/lib64/libvendor.goodix.hardware.biometrics.fingerprint@2.1.so
 
 # FM
