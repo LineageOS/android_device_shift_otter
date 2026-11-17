@@ -32,16 +32,17 @@ using android::sp;
 int main() {
     android::sp<IBiometricsFingerprint> bio = BiometricsFingerprint::getInstance();
 
-    configureRpcThreadpool(1, true /*callerWillJoin*/);
-
-    if (bio != nullptr) {
-        if (::android::OK != bio->registerAsService()) {
-            return 1;
-        }
-    } else {
-        ALOGE("Can't create instance of BiometricsFingerprint, nullptr");
+    if (bio == nullptr) {
+        ALOGE("Can't create instance of BiometricsFingerprint, exiting");
+        return 1;
     }
 
+    if (::android::OK != bio->registerAsService()) {
+        ALOGE("Failed to register BiometricsFingerprint service, exiting");
+        return 1;
+    }
+
+    configureRpcThreadpool(1, true /*callerWillJoin*/);
     joinRpcThreadpool();
 
     return 0; // should never get here
