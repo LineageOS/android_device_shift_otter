@@ -76,6 +76,19 @@ BiometricsFingerprint::~BiometricsFingerprint() {
     mDevice = nullptr;
 }
 
+IBiometricsFingerprint* BiometricsFingerprint::getInstance() {
+    if (!sInstance) {
+        sInstance = new BiometricsFingerprint();
+        if (sInstance->mDevice == nullptr) {
+            ALOGE("Fingerprint device could not be opened, destroying instance");
+            delete sInstance;
+            sInstance = nullptr;
+            return nullptr;
+        }
+    }
+    return sInstance;
+}
+
 Return<RequestStatus> BiometricsFingerprint::ErrorFilter(int32_t error) {
     switch(error) {
         case 0: return RequestStatus::SYS_OK;
@@ -218,13 +231,6 @@ Return<RequestStatus> BiometricsFingerprint::authenticate(uint64_t operationId,
     return ErrorFilter(mDevice->authenticate(mDevice, operationId, gid));
 }
 
-IBiometricsFingerprint* BiometricsFingerprint::getInstance() {
-    if (!sInstance) {
-      sInstance = new BiometricsFingerprint();
-    }
-    return sInstance;
-}
-
 fingerprint_device_t* BiometricsFingerprint::openHal() {
     int err;
     const hw_module_t *hw_mdl = nullptr;
@@ -274,8 +280,13 @@ fingerprint_device_t* BiometricsFingerprint::openHal() {
 void BiometricsFingerprint::notify(const fingerprint_msg_t *msg) {
     BiometricsFingerprint* thisPtr = static_cast<BiometricsFingerprint*>(
             BiometricsFingerprint::getInstance());
+    if (thisPtr == nullptr) {
+        ALOGE("Receiving callbacks before the instance is registered.");
+        return;
+    }
+
     std::lock_guard<std::mutex> lock(thisPtr->mClientCallbackMutex);
-    if (thisPtr == nullptr || thisPtr->mClientCallback == nullptr) {
+    if (thisPtr->mClientCallback == nullptr) {
         ALOGE("Receiving callbacks before the client callback is registered.");
         return;
     }
