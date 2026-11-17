@@ -177,43 +177,80 @@ Return<uint64_t> BiometricsFingerprint::setNotify(
     // unique token for its driver. Subsequent versions should send a unique
     // token for each call to setNotify(). This is fine as long as there's only
     // one fingerprint device on the platform.
+    if (mDevice == nullptr) {
+        ALOGE("No valid device");
+        return 0;
+    }
     return reinterpret_cast<uint64_t>(mDevice);
 }
 
 Return<uint64_t> BiometricsFingerprint::preEnroll()  {
+    if (mDevice == nullptr) {
+        ALOGE("No valid device");
+        return 0;
+    }
     return mDevice->pre_enroll(mDevice);
 }
 
 Return<RequestStatus> BiometricsFingerprint::enroll(const hidl_array<uint8_t, 69>& hat,
         uint32_t gid, uint32_t timeoutSec) {
+    if (mDevice == nullptr) {
+        ALOGE("No valid device");
+        return RequestStatus::SYS_UNKNOWN;
+    }
     const hw_auth_token_t* authToken =
         reinterpret_cast<const hw_auth_token_t*>(hat.data());
     return ErrorFilter(mDevice->enroll(mDevice, authToken, gid, timeoutSec));
 }
 
 Return<RequestStatus> BiometricsFingerprint::postEnroll() {
+    if (mDevice == nullptr) {
+        ALOGE("No valid device");
+        return RequestStatus::SYS_UNKNOWN;
+    }
     return ErrorFilter(mDevice->post_enroll(mDevice));
 }
 
 Return<uint64_t> BiometricsFingerprint::getAuthenticatorId() {
+    if (mDevice == nullptr) {
+        ALOGE("No valid device");
+        return 0;
+    }
     return mDevice->get_authenticator_id(mDevice);
 }
 
 Return<RequestStatus> BiometricsFingerprint::cancel() {
+    if (mDevice == nullptr) {
+        ALOGE("No valid device");
+        return RequestStatus::SYS_UNKNOWN;
+    }
     onFingerUp();
     return ErrorFilter(mDevice->cancel(mDevice));
 }
 
 Return<RequestStatus> BiometricsFingerprint::enumerate()  {
+    if (mDevice == nullptr) {
+        ALOGE("No valid device");
+        return RequestStatus::SYS_UNKNOWN;
+    }
     return ErrorFilter(mDevice->enumerate(mDevice));
 }
 
 Return<RequestStatus> BiometricsFingerprint::remove(uint32_t gid, uint32_t fid) {
+    if (mDevice == nullptr) {
+        ALOGE("No valid device");
+        return RequestStatus::SYS_UNKNOWN;
+    }
     return ErrorFilter(mDevice->remove(mDevice, gid, fid));
 }
 
 Return<RequestStatus> BiometricsFingerprint::setActiveGroup(uint32_t gid,
         const hidl_string& storePath) {
+    if (mDevice == nullptr) {
+        ALOGE("No valid device");
+        return RequestStatus::SYS_UNKNOWN;
+    }
+
     if (storePath.size() >= PATH_MAX || storePath.size() <= 0) {
         ALOGE("Bad path length: %zd", storePath.size());
         return RequestStatus::SYS_EINVAL;
@@ -228,6 +265,10 @@ Return<RequestStatus> BiometricsFingerprint::setActiveGroup(uint32_t gid,
 
 Return<RequestStatus> BiometricsFingerprint::authenticate(uint64_t operationId,
         uint32_t gid) {
+    if (mDevice == nullptr) {
+        ALOGE("No valid device");
+        return RequestStatus::SYS_UNKNOWN;
+    }
     return ErrorFilter(mDevice->authenticate(mDevice, operationId, gid));
 }
 
@@ -387,14 +428,26 @@ Return<bool> BiometricsFingerprint::isUdfps(uint32_t) {
 
 Return<void> BiometricsFingerprint::onFingerDown(uint32_t, uint32_t, float, float) {
     ALOGD("onFingerDown()");
+    if (mDevice == nullptr) {
+        ALOGE("No valid device");
+        return Void();
+    }
     setUdfpsHbm(true);
-    mDevice->send_customized_command(mDevice, CMD_FINGERPRINT_EVENT, CMD_FINGERPRINT_EVENT_DOWN);
+    if (mDevice->send_customized_command != nullptr) {
+        mDevice->send_customized_command(mDevice, CMD_FINGERPRINT_EVENT, CMD_FINGERPRINT_EVENT_DOWN);
+    }
     return Void();
 }
 
 Return<void> BiometricsFingerprint::onFingerUp() {
     ALOGD("onFingerUp()");
-    mDevice->send_customized_command(mDevice, CMD_FINGERPRINT_EVENT, CMD_FINGERPRINT_EVENT_UP);
+    if (mDevice == nullptr) {
+        ALOGE("No valid device");
+        return Void();
+    }
+    if (mDevice->send_customized_command != nullptr) {
+        mDevice->send_customized_command(mDevice, CMD_FINGERPRINT_EVENT, CMD_FINGERPRINT_EVENT_UP);
+    }
     setUdfpsHbm(false);
     return Void();
 }
