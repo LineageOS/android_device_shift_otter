@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11f9d9d2_fe111284",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2026-11-19T10:53:14Z",
+      "side": 1,
+      "message": "Pick https://github.com/LineageOS/android_hardware_interfaces/commit/56030803f818d623e6abbfe675164af55de22638 instead and make the additional udfps related changes a separate commit? The setNotify check could be added in hardware/interfaces as a fixup as well",
+      "revId": "34c66e3bb8592f6f33f7b65b04403f747bc75137",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
