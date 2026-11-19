@@ -34,6 +34,24 @@
       "parentUuid": "11f9d9d2_fe111284",
       "revId": "34c66e3bb8592f6f33f7b65b04403f747bc75137",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fa65433_5d360fd7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19282
+      },
+      "writtenOn": "2026-11-19T11:57:04Z",
+      "side": 1,
+      "message": "Ah nice, have not seen this commit, just went with what I have seen when going through a bug report.\n\nWill submit the other 2 changes also for hardware/interfaces.",
+      "parentUuid": "f3ab064b_076a8b50",
+      "revId": "34c66e3bb8592f6f33f7b65b04403f747bc75137",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
