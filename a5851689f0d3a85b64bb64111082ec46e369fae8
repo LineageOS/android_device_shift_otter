@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01cad041_05c32915",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19979
+      },
+      "writtenOn": "2026-11-23T22:41:30Z",
+      "side": 1,
+      "message": "Blobs: https://github.com/elginsk8r/proprietary_vendor_shift_otter/tree/lineage-24.0",
+      "revId": "a5851689f0d3a85b64bb64111082ec46e369fae8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
